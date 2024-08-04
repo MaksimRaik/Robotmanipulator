@@ -26,9 +26,7 @@ class parametrs:
 
         y = self.L1 * np.sin(un1) + self.L2 * np.sin(un3)
 
-        print(x, y)
-
-        if x != self.x or y!= self.y:
+        if np.fabs(x - self.x) >= 1.0e-8 or np.fabs(y - self.y) >= 1.0e-8:
 
             print( f'Error x = {self.x} and y= {self.y} out of range' )
 
@@ -40,10 +38,10 @@ class parametrs:
 
         if self.coordinate_test_start():
 
-            theta_1 = np.arccos( (self.L2**2 - self.L1**2 - self.y**2 - (self.x - self.L3)**2) /
-                             (-2. * self.L1 * np.sqrt( self.y**2 + (self.x - self.L3)**2 ) ) ) - np.arctan( self.y / (self.x - self.L3) )
+            theta_1 = np.arctan( self.y / (self.x - self.L3) ) - np.arccos( (-self.L2**2 + self.L1**2 + self.y**2 + (self.x - self.L3)**2) /
+                                                                            (2. * self.L1 * np.sqrt( self.y**2 + (self.x - self.L3)**2 ) ) )
 
-            theta_2 = np.arccos( (self.y**2 +(self.x - self.L3)**2 - self.L2**2 - self.L1**2) / 2. / self.L1 / self.L2 )
+            theta_2 = np.arccos( (self.y**2 + (self.x - self.L3)**2 - self.L2**2 - self.L1**2) / 2. / self.L1 / self.L2 )
 
             theta_3 = theta_1 + theta_2
 
@@ -53,7 +51,7 @@ class parametrs:
 
                 print( f'Error theta_1 = {theta_1 / np.pi * 180.} out of range' )
 
-            elif theta_2 < 0.0 or theta_2 >= 3. * np.pi / 4.:
+            elif theta_2 < 0.0 or theta_2 >= np.pi / 2.:
 
                 print( f'Error theta_2 = {theta_2 / np.pi * 180.} out of range' )
 
@@ -69,7 +67,7 @@ class parametrs:
 
             return False
 
-ungle1 = parametrs(4., 0.4, 3.2, 2., 0.2)
+ungle1 = parametrs(4.5*np.cos(1. / 180. * np.pi) + 0.5, 4.5 * np.sin(1. / 180. * np.pi), 2., 2.8, 0.2)
 
 print(ungle1.calc_ungle())
 
