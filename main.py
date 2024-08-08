@@ -10,6 +10,16 @@ class parametrs:
         self.L2 = L2
         self.L3 = L3
 
+    def arcctan(self, x):
+
+        if x >= 0.0:
+
+            return np.arcsin( 1. / np.sqrt(1. + (x**2) ) )
+
+        else:
+
+            return np.pi - np.arcsin( 1. / np.sqrt(1. + (x**2) ) )
+
     def coordinate_test_start(self):
 
         if np.sqrt(self.x**2 + self.y**2) > self.L1 +self.L2 + self.L3:
@@ -38,20 +48,20 @@ class parametrs:
 
         if self.coordinate_test_start():
 
-            theta_1 = np.arctan( self.y / (self.x - self.L3) ) - np.arccos( (-self.L2**2 + self.L1**2 + self.y**2 + (self.x - self.L3)**2) /
+            theta_1 = self.arcctan( (self.x - self.L3) / self.y ) - np.arccos( (-self.L2**2 + self.L1**2 + self.y**2 + (self.x - self.L3)**2) /
                                                                             (2. * self.L1 * np.sqrt( self.y**2 + (self.x - self.L3)**2 ) ) )
 
             theta_2 = np.arccos( (self.y**2 + (self.x - self.L3)**2 - self.L2**2 - self.L1**2) / 2. / self.L1 / self.L2 )
 
             theta_3 = theta_1 + theta_2
 
-            print( theta_1, theta_2, theta_3)
+            #print( theta_1, theta_2, theta_3)
 
             if theta_1 >= 3. * np.pi / 2. or theta_1 < 0.0:
 
                 print( f'Error theta_1 = {theta_1 / np.pi * 180.} out of range' )
 
-            elif theta_2 < 0.0 or theta_2 >= np.pi / 2.:
+            elif theta_2 < 0.0 or theta_2 >= 3. * np.pi / 4.:
 
                 print( f'Error theta_2 = {theta_2 / np.pi * 180.} out of range' )
 
@@ -67,7 +77,7 @@ class parametrs:
 
             return False
 
-ungle1 = parametrs(4.5*np.cos(1. / 180. * np.pi) + 0.5, 4.5 * np.sin(1. / 180. * np.pi), 2., 2.8, 0.2)
+ungle1 = parametrs(1., 1., 1., 1., 1.)
 
 print(ungle1.calc_ungle())
 
