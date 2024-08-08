@@ -16,7 +16,9 @@
 
 Формулы для углов:
 
-$theta_1 = \arcctg( (x - L_3) / y ) - \arccos( (-L_2^2 + L_1^2 + y^2 + (x - L_3)^2) /
+$\theta_1 = \arcctg( (x - L_3) / y ) - \arccos( (-L_2^2 + L_1^2 + y^2 + (x - L_3)^2) /
 (2. * L_1 * \sqrt{( y^2 + (x - L_3)^2 )} ) )$
 
-$theta_2 = \arccos( (y^2 + (x - L_3)^2 - L_2^2 - L_1^2) / 2. / L_1 / L_2 )$
+$\theta_2 = \arccos( (y^2 + (x - L_3)^2 - L_2^2 - L_1^2) / 2. / L_1 / L_2 )$
+
+$\theta_3 = \theta_1 + \theta_2$
