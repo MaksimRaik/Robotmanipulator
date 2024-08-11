@@ -48,8 +48,15 @@ class parametrs:
 
         if self.coordinate_test_start():
 
-            theta_1 = self.arcctan( (self.x - self.L3) / self.y ) - np.arccos( (-self.L2**2 + self.L1**2 + self.y**2 + (self.x - self.L3)**2) /
+            if np.fabs(self.x - self.L3) <=1.0e-10:
+
+                theta_1 = self.arcctan( (self.x - self.L3) / self.y ) - np.arccos( (-self.L2**2 + self.L1**2 + self.y**2 + (self.x - self.L3)**2) /
                                                                             (2. * self.L1 * np.sqrt( self.y**2 + (self.x - self.L3)**2 ) ) )
+
+            else:
+
+                theta_1 = np.arctan( self.y / (self.x - self.L3) ) - np.arccos( (-self.L2 ** 2 + self.L1 ** 2 + self.y ** 2 + (self.x - self.L3) ** 2) /
+                    (2. * self.L1 * np.sqrt(self.y ** 2 + (self.x - self.L3) ** 2)))
 
             theta_2 = np.arccos( (self.y**2 + (self.x - self.L3)**2 - self.L2**2 - self.L1**2) / 2. / self.L1 / self.L2 )
 
